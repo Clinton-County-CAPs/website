@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clinton County CAPS - Home</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            background-color: #ffffff;
+            color: #0a0707;
+            overflow-x: hidden;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+        }
+
+        .logo {
+            width: 50px;
+            height: auto;
+        }
+
+        h1 {
+            color: #f13838;
+            font-size: 3em;
+            font-weight: bold;
+            margin: 0 20px;
+            flex: 1;
+            text-align: left;
+        }
+
+        nav {
+            display: flex;
+        }
+
+        nav a {
+            margin-left: 20px;
+            text-decoration: none;
+            color: #0a0707;
+            font-weight: bold;
+            font-size: 1.1em;
+            border: 2px solid #f13838; /* Show border color by default */
+            padding: 10px 15px; /* Add padding for a button-like appearance */
+            border-radius: 5px; /* Optional: rounded corners */
+            background-color: transparent; /* Background color for the button */
+            transition: color 0.3s, background-color 0.3s; /* Transition for color and background */
+        }
+
+        nav a:hover {
+            color: #ffffff; /* Change text color on hover */
+            background-color: #f15f38; /* Change background on hover */
+        }
+
+
+
+        main {
+            position: relative;
+            text-align: left;
+            max-height: 100vh;
+            overflow: hidden;
+            padding: 20px;
+        }
+
+        .overlay-photo {
+            width: 98%;
+            height: 30vh;
+            object-fit: cover;
+            border: 6px solid #f13838;
+            border-radius: 10px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 75%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #ffffff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 2.5em;
+            margin: 0;
+            color: #ffffff;
+        }
+
+        p {
+            font-size: 1.5em;
+            margin: 0;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .dropdown-container {
+            display: flex;
+            flex-direction: column;
+            padding: 40px 20px;
+            background-color: #f5f5f5;
+        }
+
+        .learn-more {
+            text-align: center;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+            color: #0a0707;
+            font-weight: bold;
+            text-decoration: underline;
+            font-style: italic;
+        }
+
+        .section {
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            padding: 10px 0;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .section h2 {
+            font-size: 2.5em;
+            margin: 0;
+            color: #0a0707;
+            flex: 1;
+        }
+
+        .arrow {
+            font-size: 1.5em;
+            color: #0a0707;
+            transition: transform 0.3s;
+            margin-left: 10px;
+        }
+
+        .arrow.rotate {
+            transform: rotate(180deg);
+        }
+
+        .content {
+            display: none;
+            font-size: 0.9em;
+            color: black;
+            padding-left: 20px;
+            margin-top: 10px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .content.show {
+            display: block;
+            max-height: 500px;
+            color: black;
+        }
+
+        .content p {
+            color: black;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9em;
+            color: #0a0707;
+        }
+
+        footer p {
+            font-size: 1.1em;
+            margin: 0;
+            font-weight: 500;
+            color: #0a0707;
+        }
+
+    </style>
+    <script>
+        function toggleContent(sectionId, arrow) {
+            const content = document.getElementById(sectionId);
+            content.classList.toggle('show');
+            arrow.classList.toggle('rotate');
+
+            if (content.classList.contains('show')) {
+                content.style.display = "block";
+                requestAnimationFrame(() => {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                });
+            } else {
+                content.style.maxHeight = "0";
+                setTimeout(() => {
+                    content.style.display = "none";
+                }, 300);
+            }
+        }
+
+        // Function to detect mobile devices
+        function isMobile() {
+            return /Mobi|Android/i.test(navigator.userAgent);
+        }
+
+        window.onload = function() {
+            if (isMobile()) {
+                const video = document.querySelector('.overlay-photo');
+                video.autoplay = true; // Ensure autoplay
+                video.muted = true; // Ensure muted for autoplay on mobile
+                video.load(); // Reload video for mobile
+            }
+        };
+    </script>
+</head>
+<body>
+
+    <header>
+        <img src="img/logo.png" alt="Logo" class="logo">
+        <h1>Jefferson Highway Mural</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="kq2.html">KQ2 Coverage</a>
+            <a href="gallery.html">Gallery</a>
+        </nav>
+    </header>
+
+    <main>
+        <video class="overlay-photo" autoplay muted loop playsinline>
+            <source src="img/dronefootage.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="overlay">
+            <h2>PLATTSBURG HISTORY</h2>
+            <p>Learn the history behind the Jefferson Highway Mural!</p>
+        </div>
+    </main>
+
+    <div class="dropdown-container">
+        <div class="learn-more">Click to learn more!</div>
+        
+        <section class="section" onclick="toggleContent('historyContent', this.querySelector('.arrow'))">
+            <div class="section-title">
+                <h2>Highway History</h2>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="content" id="historyContent">
+                <p>The Jefferson Highway is part of the history of automobile travel in the United States. The Jefferson Highway Association was formed in 1915 to help construct ‘good roads’ creating the first north/south international highway. The Jefferson Highway traveled from Winnipeg, Canada to New Orleans, LA and was nicknamed the Pine to Palm Highway. City leaders, knowing access to this highway would potentially bring increased business and tourism, campaigned for the Jefferson Highway Association to include their city. Plattsburg, midway along the route, was chosen with construction beginning in 1916. The route of the Jefferson Highway travels down Main Street past Tinnen Town Hall’s west wall. Many towns along the Jefferson Highway are painting murals to honor the historic highway.</p>
+                <p>The beginning of Plattsburg’s mural project is due to the Clinton County Historical Society/Plattsburg initiative. The desire to see the highway honored was championed by Terry Wood and his wife, Lynn, members of the Jefferson Highway Association. The president of the Historical Clinton County Society, Lesli Shaver, along with her board, embraced the idea. This led to their joining forces with the Plattsburg Community Association, Somyia Finley, chair, and the Community Betterment and Arts Council, Charnette Norton, chair.</p>
+            </div>
+        </section>
+
+        <section class="section" onclick="toggleContent('artistContent', this.querySelector('.arrow'))">
+            <div class="section-title">
+                <h2>Mural Artist</h2>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="content" id="artistContent">
+                <p>Daniel Bartle received his Bachelor of Fine Art in painting from the Kansas City Art Institute.</p>
+                <p>Daniel Bartle was selected due to his mural idea and reputation as an artist. He is a visual artist based in Kansas City, where he has been practicing art professionally for more than 20 years. From architectural watercolor illustration to large-scale mural painting, Bartle’s portfolio reflects an ever-striving approach to a life-long passion.</p>
+            </div>
+        </section>
+
+        <section class="section" onclick="toggleContent('fordContent', this.querySelector('.arrow'))">
+            <div class="section-title">
+                <h2>Why Tinnen Town Hall?</h2>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="content" id="fordContent">
+                <p>In 1915, C. R. Young built this building in downtown Plattsburg at the corner of Maple and Main St (Jefferson Highway) to house his auto business. That same year, Mr. Young served on the board of the Clinton County Jefferson Highway Association with the responsibility of raising money to "insure Clinton County stays in good standing with the Jefferson Highway Association." In 1935-1936, he sold the building to H.O. Tinnen so Mr. Tinnen could operate a Ford dealership...</p>
+                <p>The original location has since housed several businesses including a Western Auto store for several years. The current building is the Tinnen Town Hall that is used by the Plattsburg License Office for their operation. We wonder if C.R. Young ever imagined that 109 years later a Jefferson Highway mural would adorn the side of his building!</p>
+            </div>
+        </section>        
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Clinton County R-3 School District</p>
+    </footer>
+
+</body>
+</html>
